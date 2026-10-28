@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <!-- Content Security Policy: only our own files, the cdnjs libraries and Google Fonts may load;
+       no inline scripts or styles. GitHub Pages can't send headers, so it lives in a meta tag. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https: data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="theme-color" content="#011f4b">
+
+  <!-- Static text for search engines and link previews (LinkedIn, WhatsApp, Slack…), which
+       don't run JavaScript. Keep it in step with blu.yaml; if you move to a custom domain,
+       update the two absolute URLs below. -->
+  <title>BLU · Frances Severino</title>
+  <meta name="description" content="Frances Severino — Software Engineer (Payments & Cloud). Ride Blu, a pixel-art space train, through my profile, experience, projects and skills.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="BLU · Frances Severino">
+  <meta property="og:description" content="Software Engineer · Payments & Cloud. Take a ride through my portfolio on a pixel-art space train.">
+  <meta property="og:url" content="https://smaranan2019.github.io/blu/">
+  <meta property="og:image" content="https://smaranan2019.github.io/blu/images/scenes/platform.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="loader" role="status"><p class="brand-big">BLU</p><p class="blink">Boarding…</p></div>
+
+  <noscript>
+    <div class="noscript framed">
+      <h1>Frances Severino</h1>
+      <p>Software Engineer · Payments &amp; Cloud · Singapore</p>
+      <p>This site is an animated train ride and needs JavaScript. Please turn it on, or open it in another browser.</p>
+    </div>
+  </noscript>
+
+  <div id="stage">
+    <div id="scenes"></div>
+    <div id="intro">
+      <h1 class="brand-big" id="intro-title">BLU</h1>
+      <p id="intro-name"></p>
+      <p id="intro-tagline"></p>
+      <p class="blink" id="intro-hint">Scroll to board ▼</p>
+    </div>
+  </div>
+
+  <main id="overlays"></main>
+
+  <nav id="route" aria-label="Journey">
+    <button class="brand" data-stop="platform" type="button" aria-label="Back to the platform">BLU</button>
+    <span class="nav-current" aria-live="polite"></span>
+    <div class="line">
+      <div class="fill"><span class="train" aria-hidden="true"></span></div>
+      <ol class="stops"></ol>
+    </div>
+  </nav>
+
+  <div id="scroller" aria-hidden="true"></div>
+  <div id="toast" role="status"></div>
+
+  <!-- Pinned versions with integrity hashes: the browser refuses a file that doesn't match,
+       so a compromised CDN can't run code on this page. -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+          integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+          integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"
+          integrity="sha512-CSBhVREyzHAjAFfBlIBakjoRUKp5h7VSweP0InR/pAJyptH7peuhCsqAI/snV+TwZmXZqoUklpXp6R6wMnYf5Q=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- Our code is split into ES modules; main.js imports the rest. -->
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+# System and temporary files
+.DS_Store
+node_modules/
+.blu-content.json
+
+# Kept on this Mac only — not published.
+# The public repo holds just what the site needs to run.
+# (These files have no backup on GitHub: copy them somewhere safe.)
+PROMPTS.md
+docs/
+tests/
+scripts/
+package.json
+.github/

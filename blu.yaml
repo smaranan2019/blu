@@ -1,0 +1,203 @@
+# ─────────────────────────────────────────────────────────────
+#  BLU — all site content lives here.
+#  Edit, save, refresh. No build step needed.
+#  Lines starting with # are comments and are ignored.
+# ─────────────────────────────────────────────────────────────
+
+site:
+  train_name: "BLU"
+  title: "BLU · Frances Severino"          # browser tab title
+  tagline: "Software Engineer · Payments & Cloud"
+
+# Colours. #03396c is the train body; amber is the accent glow.
+theme:
+  void: "#000814"
+  night: "#011f4b"
+  blu: "#03396c"
+  mid: "#005b96"
+  soft: "#6497b1"
+  pale: "#b3cde0"
+  amber: "#ffb347"
+
+# ── Scene images ─────────────────────────────────────────────
+# Swap the placeholder .svg for your Midjourney .png/.webp.
+# `targets` are the zoom points as [x%, y%] of the image.
+# Open the site with ?debug at the end of the URL and click on
+# an image to read off its coordinates.
+scenes:
+  platform:
+    image: images/scenes/platform.jpg
+    targets: { door: [50, 57] }
+  cabin_side:
+    image: images/scenes/cabin-side.jpg
+    targets: { poster: [50, 45] }
+  cabin_front:
+    image: images/scenes/cabin-front.avif
+    targets: { door_window: [50, 44] }
+  corridor:
+    image: images/scenes/corridor.avif
+    targets: { left_door: [25, 57], right_door: [75, 57], end_door: [50, 52] }
+  bunk:
+    image: images/scenes/bunk.jpg
+    targets: { screen: [50, 27] }
+  cargo:
+    image: images/scenes/cargo.jpg
+    targets: { crates: [50, 59] }
+  cab:
+    image: images/scenes/cab.jpg
+    targets: { console: [50, 66], windscreen: [50, 32] }
+  arrival:
+    image: images/scenes/arrival.jpg
+    targets: { sign: [59, 30] }
+
+# ── Carriage side · poster ───────────────────────────────────
+profile:
+  name: "Frances Severino"
+  title: "Associate, CIB Payments (Authorization Engine) · JPMorgan Chase"
+  location: "Singapore"
+  avatar: images/avatar.svg
+  summary: |
+    Software engineer at JPMorgan, three years in, working on the card
+    authorization engine and before that on Azure platform tooling.
+
+    I like owning things end to end: building the tool, running it in
+    production, and being the one people ask when it breaks.
+  highlights:
+    - "JPMorgan Global Hackathon — Champion, 2021 and 2022"
+    - "Ellipsis TicTac Code live coding — 2nd place"
+    - "AWS Solutions Architect · Azure Developer (AZ-204)"
+    - "BSc Information Systems, Singapore Management University (2023)"
+  interests: "Women in Tech · Children in STEM · diving · snowboarding · making focaccia · surviving HIIT"
+
+# ── Sleeper bunk · world map ─────────────────────────────────
+map:
+  image: images/worldmap.jpg
+  zoom: 3            # how far the map zooms in on each stop
+
+# Newest first. coords are [latitude, longitude].
+experience:
+  - role: "Associate, CIB Payments (Authorization Engine)"
+    company: "JPMorgan Chase"
+    location: "Singapore"
+    coords: [1.29, 103.85]
+    start: "Sep 2025"
+    end: "Present"
+    summary: "Java (Reactive), Go, Python, FastAPI, AWS, Docker, Datadog, Splunk"
+    bullets:
+      - "Traced a recurring set of client certificate failures to a single defect, using the Datadog SLO dashboards and Splunk alerts I set up for the service, and worked with the owning team to get it fixed."
+      - "Wrote the executive summary and timeline for a P1 merchant outage, then load tested the engine with JMeter so we had real capacity numbers for the next one. Added OpenTelemetry tracing to the authorization logs."
+      - "Built our service health report as code with GitHub Copilot and MCP. It publishes to Confluence and saves about 50 to 75 hours of manual work a year."
+      - "Use Copilot daily for code, tests and docs, and review what it writes against tests before merging."
+
+  - role: "Analyst, Cloud Foundational Services (Azure)"
+    company: "JPMorgan Chase"
+    location: "Singapore"
+    coords: [1.29, 103.85]
+    start: "Aug 2023"
+    end: "Sep 2025"
+    summary: "React, Spring Boot, Azure, AWS, Terraform, Spinnaker, Jenkins"
+    bullets:
+      - "Took AGLens from an idea to production: a React and Spring Boot dashboard tracking config drift across 10,000+ Azure datasets. Reconciliation got about 3× faster and it closed an open external audit finding."
+      - "Brought Azure into AHEAD, the firm's resource management pipeline, which had only supported AWS. It now manages around 50,000 Azure resources."
+      - "Started the team's chaos testing from scratch. The Terraform base I wrote became the team standard, and we used it to run cross-region outage drills."
+
+# ── Cargo hold · projects ────────────────────────────────────
+# Newest first. Each project can have its own photo folder: images/projects/<slug>/
+# Add as many photos as you like; they become a swipeable carousel.
+# `bullets` are optional key points shown under the summary.
+projects:
+  - title: "Holmes — Self-Service Triage Portal"
+    client: "JPMorgan Chase · internal tool"
+    summary: "Replaces a manual runbook. Paste in a log or error, and it tells you whether the fix sits with the client, the data setup or the platform."
+    bullets:
+      - "A rules engine built from the ~50 production tickets I'd triaged and closed classifies the failure, then verifies it live against 7 internal APIs. The authorization pipeline is modelled as 5 stages, so it pinpoints which hop failed and which system owns the data."
+      - "Auth runs on the caller's own ADFS token, so the service stores no secrets."
+      - "Safe under concurrent load: a shared, pooled HTTP client removed a 50–200 ms TLS handshake from every upstream call; bounded fan-out and request threads, and token caching with an AD-lockout guard, let it scale out by adding pods."
+      - "Request IDs shown to users, structured logs for every upstream call, and real 5xx responses, so failures show up in metrics instead of hiding behind HTTP 200s. 117 offline tests seeded from redacted production payloads."
+    tags: [Python, FastAPI, httpx, ADFS / OAuth2, Vanilla JS, pytest, Kubernetes, Datadog APM, Splunk]
+
+  - title: "Payment Ops & Work Dashboards — Automated Reporting Pipeline"
+    client: "JPMorgan Chase · internal tool"
+    summary: "A data-as-code reporting pipeline: one JSON source of truth renders into a self-contained HTML dashboard (support requests, code changes and incidents by volume, root causes, SLA/latency, open items), used live in team meetings to drive product-health discussions. Saves 2–3 hours of manual reporting a fortnight (about 50–75 hours a year) and keeps the numbers consistent and audit-ready."
+    bullets:
+      - "Validated, idempotent publish path: a validation gate rejects malformed data (bad months, products or outcomes, duplicates, mismatched arrays), and an anchored regex swaps only a delimited DATA block, one record per line so diffs stay reviewable."
+      - "Publishes to Confluence over the REST API with PAT auth, with a --dry-run mode."
+      - "GitHub Copilot (MCP) pulls the latest payment state from the internal ticketing system and publishes it: one engine serving a team Ops Dashboard and a personal Work Dashboard."
+    tags: [Python, requests, Confluence REST API, Vanilla JS, HTML, GitHub Copilot, MCP]
+
+  - title: "Snif — Singapore Haze Widget"
+    client: "Personal project · iOS & Android"
+    summary: "A pixel-art iOS and Android widget where Milk Tea the capybara shows Singapore's live haze level, from NEA air-quality data."
+    bullets:
+      - "Native on both platforms: SwiftUI + WidgetKit on iOS, Jetpack Compose + Glance on Android."
+      - "One tested core shared by the app and the widget, with explicit no-data and stale states, so unknown air is never shown as safe."
+    tags: [Swift, Kotlin, SwiftUI, Jetpack Compose, WidgetKit, Glance, REST API, CI]
+
+  - title: "Credit Card Rewards System"
+    client: "Ascenda · university project"
+    date: "Jul 2023"
+    summary: "Full-stack AWS application (React + Spring Boot) managing 10K+ daily transactions, reducing point-redemption latency by 40%. CI/CD with CodePipeline and automated fraud checks on Lambda."
+    tags: [React, Spring Boot, AWS, Lambda, CodePipeline]
+    photos:
+      - images/projects/rewards/1.svg
+      - images/projects/rewards/2.svg
+
+  - title: "VR Market Sentiment Dashboard"
+    client: "SafeVR · university project"
+    date: "Oct 2022"
+    summary: "Real-time sentiment analysis tool (Python, AWS Lambda) tracking 1K+ VR user reviews, guiding feature prioritisation for 5+ product teams."
+    tags: [Python, AWS Lambda, NLP]
+    photos:
+      - images/projects/safevr/1.svg
+
+# ── Driver's cab · console ───────────────────────────────────
+skills:
+  - category: "Languages"
+    items: [Java, Go, Python, JavaScript, SQL, Swift, Kotlin]
+  - category: "Frameworks"
+    items: [Spring Boot, FastAPI, React, SwiftUI, Jetpack Compose]
+  - category: "Cloud & Infra"
+    items: [AWS, Azure, Docker, Kubernetes, Terraform, Jenkins, Spinnaker]
+  - category: "Observability"
+    items: [Datadog, Splunk, OpenTelemetry, JMeter]
+  - category: "AI & Automation"
+    items: [GitHub Copilot, MCP, Confluence REST API]
+  - category: "Certifications"
+    items: [AWS Solutions Architect, Azure AZ-204]
+
+# ── Arrival station · contact ────────────────────────────────
+contact:
+  heading: "End of the line"
+  message: "Thanks for riding Blu. Let's build something together."
+  email: "you@example.com"                 # TODO: your email
+  # phone: "+65 …"                        # optional — left off so it isn't public
+  location: "Singapore"
+  # icon is picked from the label/url (linkedin, github, medium, website).
+  # Set `icon:` explicitly to override; unknown sites get a link icon.
+  socials:
+    - label: "LinkedIn"
+      url: "https://www.linkedin.com/in/francesseverino"
+    - label: "GitHub"
+      url: "https://github.com/"           # TODO
+    - label: "Website"
+      url: "https://example.com"           # TODO
+    - label: "Medium"
+      url: "https://medium.com/"           # TODO
+
+# ── Interface text ───────────────────────────────────────────
+# Every word the site shows that isn't your content. Change any of these
+# (or translate them); anything you leave out uses the built-in default.
+# {n}, {total} and {name} are filled in automatically.
+labels:
+  scroll_hint: "Scroll to board"
+  stops:
+    platform: "Platform"
+    profile: "Profile"
+    experience: "Experience"
+    projects: "Projects"
+    skills: "Skills"
+    contact: "Contact"
+  job_counter: "Stop {n} / {total}"
+  project_counter: "Crate {n} / {total}"
+  project_link: "Open project"
+  contact_heading: "End of the line"
